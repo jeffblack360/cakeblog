@@ -43,10 +43,10 @@ class ArticlesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('title');
+            ->notEmpty('title');
 
         $validator
-            ->allowEmpty('body');
+            ->notEmpty('body');
 
         return $validator;
     }
