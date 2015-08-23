@@ -28,6 +28,9 @@ class ArticlesTable extends Table
         $this->displayField('title');
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
+        $this->belongsTo('Categories', [
+            'foreignKey' => 'category_id',
+        ]);
     }
 
     /**
