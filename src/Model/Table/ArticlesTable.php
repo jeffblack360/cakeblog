@@ -53,4 +53,16 @@ class ArticlesTable extends Table
 
         return $validator;
     }
+    
+    /**
+    * isOwnedBy Method
+    *
+    * Return true if user owns article.
+    *
+    * @return true|false
+    */
+    public function isOwnedBy($articleId, $userId)
+    {
+        return $this->exists(['id' => $articleId, 'user_id' => $userId]);
+    }
 }

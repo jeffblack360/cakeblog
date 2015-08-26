@@ -59,4 +59,21 @@ class AppController extends Controller
         $this->Auth->allow(['index','view','display']);
     }
 
+    /**
+    * isAuthorized hook method
+    * 
+    * Returns true when user is admin
+    *
+    * @return boolean
+    */
+    public function isAuthorized($user)
+    {
+        // Admin role users may pass
+        if (isset($user['role']) && $user['role'] === 'admin') {
+            return true;
+        }
+
+        // Deny access by default
+        return false;
+    }
 }
