@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Cache\Cache;
 
 /**
  * Categories Controller
@@ -11,6 +12,16 @@ use App\Controller\AppController;
 class CategoriesController extends AppController
 {
 
+    protected function cacheCategories()
+    {
+        if (($categories = Cache::read('categories')) === false) {
+            $categories = $this->Categories;
+            Cache::write('categories', $categories);
+        }
+        return $categories;
+        
+    }
+    
     /**
      * Index method
      *
@@ -21,7 +32,8 @@ class CategoriesController extends AppController
         $this->paginate = [
             'contain' => ['ParentCategories']
         ];
-        $this->set('categories', $this->paginate($this->Categories));
+//        $this->set('categories', $this->paginate($this->Categories));
+        $this->set('categories', $this->paginate($this->cacheCategories()));
         $this->set('_serialize', ['categories']);
     }
 
