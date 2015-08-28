@@ -11,15 +11,21 @@ use Cake\Cache\Cache;
  */
 class CategoriesController extends AppController
 {
-
-    protected function cacheCategories()
+    /**
+     * cacheCategories method
+     * 
+     * Attempt to read Categories from Cache. Write result to Cache when not 
+     * found.
+     *
+     * @return \App\Model\Table\CategoriesTable $Categories
+     */
+    private function cacheCategories()
     {
         if (($categories = Cache::read('categories')) === false) {
             $categories = $this->Categories;
             Cache::write('categories', $categories);
         }
         return $categories;
-        
     }
     
     /**
@@ -32,7 +38,6 @@ class CategoriesController extends AppController
         $this->paginate = [
             'contain' => ['ParentCategories']
         ];
-//        $this->set('categories', $this->paginate($this->Categories));
         $this->set('categories', $this->paginate($this->cacheCategories()));
         $this->set('_serialize', ['categories']);
     }
