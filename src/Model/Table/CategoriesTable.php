@@ -16,6 +16,11 @@ use Cake\Validation\Validator;
  */
 class CategoriesTable extends Table
 {
+    public function cacheCategories()
+    {
+        $categories = $this->find();
+        return $categories->cache('categories');
+    }
 
     /**
      * Initialize method

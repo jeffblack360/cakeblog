@@ -21,11 +21,15 @@ class CategoriesController extends AppController
      */
     private function cacheCategories()
     {
-        if (($categories = Cache::read('categories')) === false) {
-            $categories = $this->Categories;
-            Cache::write('categories', $categories);
-        }
-        return $categories;
+        return $this->Categories->cacheCategories();
+//        $categories = $this->Categories->find();
+//        return $categories->cache('categories');
+        
+//        if (($categories = Cache::read('categories')) === false) {
+//            $categories = $this->Categories;
+//            Cache::write('categories', $categories);
+//        }
+//        return $categories;
     }
     
     /**
