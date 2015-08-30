@@ -17,7 +17,7 @@ class HelloShell extends Shell
     public function main()
     {
         $this->out('Hello world');
-        
+        $this->log('HelloShell was executed.', 'info');
     }
     
     /**
