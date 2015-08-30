@@ -22,6 +22,7 @@ class CategoriesController extends AppController
     private function cacheCategories()
     {
         return $this->Categories->cacheCategories();
+        
 //        $categories = $this->Categories->find();
 //        return $categories->cache('categories');
         
