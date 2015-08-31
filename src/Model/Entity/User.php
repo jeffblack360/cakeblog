@@ -29,4 +29,15 @@ class User extends Entity
     {
         return (new DefaultPasswordHasher)->hash($password);
     }
+    
+    /**
+    * Hash the User password on display
+    *
+    * @var string
+    */
+    protected function _getHashedUsername()
+    {
+        $username = $this->_properties['username'];
+        return (new DefaultPasswordHasher)->hash($username);
+    }    
 }
