@@ -40,6 +40,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </div>
         <div class="header-help">
             <span><?= $this->Html->link('Home', ['_name' => 'home']) ?></span>
+            <span><?= $this->Html->link('Users', ['controller' => 'Users', 'action' => 'index']) ?></span>
+            <span><?= $this->Html->link('Articles', ['controller' => 'Articles', 'action' => 'index']) ?></span>
+            <span><?= $this->Html->link('Categories', ['controller' => 'Categories', 'action' => 'index']) ?></span>
             <?php if (!$authUser): ?>
                 <span><?= $this->Html->link('Login', ['_name' => 'login']) ?></span>
             <?php else: ?>
