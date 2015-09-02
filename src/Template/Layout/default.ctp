@@ -39,9 +39,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <span><?= $this->fetch('title') ?></span>
         </div>
         <div class="header-help">
-            <span><a target="_blank" href="http://book.cakephp.org/3.0/">Documentation</a></span>
-            <span><a target="_blank" href="http://api.cakephp.org/3.0/">API</a></span>
-            <span><?= $this->Html->link('Login', ['_name' => 'login']) ?></span>
+            <span><?= $this->Html->link('Home', ['_name' => 'home']) ?></span>
+            <?php if (!$authUser): ?>
+                <span><?= $this->Html->link('Login', ['_name' => 'login']) ?></span>
+            <?php else: ?>
+                <span><?= $this->Html->link('Logout', ['_name' => 'logout']) ?></span>
+            <?php endif; ?>
         </div>
     </header>
     <div id="container">
