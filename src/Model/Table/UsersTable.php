@@ -7,6 +7,8 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
+use Cake\Log\Log;
+
 /**
  * Users Model
  *
@@ -71,5 +73,11 @@ class UsersTable extends Table
     {
         $rules->add($rules->isUnique(['username']));
         return $rules;
+    }
+
+    public function afterSave($event, $entity, $options)
+    {
+        Log::write('info', 'afterSave was executed.');
+        //$this->log('afterSave executed','info');
     }
 }
