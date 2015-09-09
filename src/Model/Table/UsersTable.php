@@ -77,7 +77,6 @@ class UsersTable extends Table
 
     public function afterSave($event, $entity, $options)
     {
-        Log::write('info', 'afterSave was executed.');
-        //$this->log('afterSave executed','info');
+        Log::write('info', 'afterSave was executed '. $entity->username);
     }
 }
