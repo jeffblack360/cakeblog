@@ -1,13 +1,15 @@
 <?php
 namespace App\Model\Table;
 
+use ArrayObject;
+
 use App\Model\Entity\User;
+use Cake\Log\Log;
+use Cake\ORM\Entity;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-
-use Cake\Log\Log;
 
 /**
  * Users Model
@@ -75,8 +77,9 @@ class UsersTable extends Table
         return $rules;
     }
 
-    public function afterSave($event, $entity, $options)
+    public function afterSave(Event $event, User $entity, ArrayObject $options)
     {
-        Log::write('info', 'afterSave was executed '. $entity->username);
+        Log::write('info', 'in UsersTable.afterSave '. $entity->username);
+        $this->dispatchEvent('UsersTable.afterSave', compact('entity','options'));
     }
 }
