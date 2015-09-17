@@ -1,6 +1,5 @@
 <?php
 
-use ArrayObject;
 use Cake\Event\Event;
 use Cake\Event\EventManager;
 use Cake\Log\Log;
