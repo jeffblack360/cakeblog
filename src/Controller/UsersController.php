@@ -20,6 +20,7 @@ class UsersController extends AppController
     {
         parent::beforeFilter($event);
         $this->Auth->allow(['add','logout']);
+        $this->set('options', ['admin' => 'Admin', 'author' => 'Author']);
     }
 
     /**
@@ -119,7 +120,7 @@ class UsersController extends AppController
             }
         }
         $this->set(compact('user'));
-        $this->set('_serialize', ['user']);
+        $this->set('_serialize', ['user', 'options']);
     }
 
     /**

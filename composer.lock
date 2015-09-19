@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dfdac570df6dc4595ba30c80986474ef",
+    "hash": "e49fc43dff63e835b5748d3bdddbc23f",
     "packages": [
         {
             "name": "aura/installer-default",
@@ -124,6 +124,44 @@
                 "localization"
             ],
             "time": "2014-08-24 00:00:00"
+        },
+        {
+            "name": "cakedc/users",
+            "version": "3.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CakeDC/users.git",
+                "reference": "c1e4235496495a63d3c9a0915c1901b07e43b135"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CakeDC/users/zipball/c1e4235496495a63d3c9a0915c1901b07e43b135",
+                "reference": "c1e4235496495a63d3c9a0915c1901b07e43b135",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "~3.0",
+                "php": ">=5.4.16"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "suggest": {
+                "google/recaptcha": "Provide reCAPTCHA validation for registration form",
+                "opauth/facebook": "Provide Social Login: Facebook Strategy, requires Opauth",
+                "opauth/opauth": "Used for Social Login, if you add Opauth, remember adding at least one strategy too",
+                "opauth/twitter": "Provide Social Login: Twitter Strategy, requires Opauth"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Users\\": "src",
+                    "Users\\Test\\Fixture\\": "tests\\Fixture"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Users plugin for CakePHP 3.x",
+            "time": "2015-08-17 14:44:09"
         },
         {
             "name": "cakephp/cakephp",
@@ -433,6 +471,63 @@
             "time": "2014-09-26 02:52:02"
         },
         {
+            "name": "opauth/opauth",
+            "version": "1.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/opauth/opauth.git",
+                "reference": "00c993c9da27a612dd973c69a32c97fe8da6b2f7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/opauth/opauth/zipball/00c993c9da27a612dd973c69a32c97fe8da6b2f7",
+                "reference": "00c993c9da27a612dd973c69a32c97fe8da6b2f7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "suggest": {
+                "opauth/facebook": "Allows Facebook authentication",
+                "opauth/google": "Allows Google authentication",
+                "opauth/twitter": "Allows Twitter authentication"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Opauth\\Opauth\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "U-Zyn Chua",
+                    "email": "chua@uzyn.com",
+                    "homepage": "http://uzyn.com"
+                },
+                {
+                    "name": "Ceeram",
+                    "email": "c33ram@gmail.com"
+                }
+            ],
+            "description": "Multi-provider authentication framework for PHP",
+            "homepage": "http://opauth.org",
+            "keywords": [
+                "Authentication",
+                "OpenId",
+                "auth",
+                "facebook",
+                "google",
+                "oauth",
+                "omniauth",
+                "twitter"
+            ],
+            "time": "2014-04-16 17:28:13"
+        },
+        {
             "name": "psr/log",
             "version": "1.0.0",
             "source": {
@@ -587,12 +682,12 @@
             "version": "v2.7.4",
             "source": {
                 "type": "git",
-                "url": "git@github.com:symfony/Console.git",
+                "url": "https://github.com/symfony/Console.git",
                 "reference": "f1f7376766394f409b9b33a57a5675a52f8aad93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/f1f7376766394f409b9b33a57a5675a52f8aad93",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/9ff9032151186bd66ecee727d728f1319f52d1d8",
                 "reference": "f1f7376766394f409b9b33a57a5675a52f8aad93",
                 "shasum": ""
             },
@@ -1247,6 +1342,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "opauth/opauth": 20,
         "psy/psysh": 0
     },
     "prefer-stable": true,

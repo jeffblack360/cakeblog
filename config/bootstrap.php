@@ -205,3 +205,8 @@ Type::build('datetime')->useLocaleParser();
  * Attach custom event listeners
  */
 require __DIR__ . '/events.php';
+
+/**
+ * Load Users Plugin
+ */
+//Plugin::load('Users', ['routes' => true, 'bootstrap' => true]);

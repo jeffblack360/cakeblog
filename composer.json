@@ -10,7 +10,9 @@
         "mobiledetect/mobiledetectlib": "2.*",
         "cakephp/migrations": "~1.0",
         "cakephp/plugin-installer": "*",
-        "twbs/bootstrap": "*"
+        "twbs/bootstrap": "*",
+        "cakedc/users": "~3.0",
+        "opauth/opauth": "1.0.x-dev"
     },
     "require-dev": {
         "psy/psysh": "@stable",
