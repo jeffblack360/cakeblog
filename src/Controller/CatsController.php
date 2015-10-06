@@ -16,11 +16,12 @@ class CatsController extends AppController
      *
      * @return void
      */
-    public function index()
+    public function index($status = null)
     {
         $this->paginate = [
             'contain' => ['Breeds']
         ];
+        
         $this->set('cats', $this->paginate($this->Cats));
         $this->set('_serialize', ['cats']);
     }

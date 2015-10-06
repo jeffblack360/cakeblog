@@ -25,6 +25,47 @@ class CatsControllerTest extends IntegrationTestCase
      *
      * @return void
      */
+    public function setUp()
+    {
+        parent::setUp();
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+    
+    /**
+     * Test index method
+     *
+     * @return void
+     */
+    public function tearDown()
+    {
+        parent::tearDown();
+    }
+
+    /**
+     * Test index method
+     *
+     * @return void
+     */
+    public function setupBeforeClass()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+    
+    /**
+     * Test index method
+     *
+     * @return void
+     */
+    public function tearDownAfterClass()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+    
+    /**
+     * Test index method
+     *
+     * @return void
+     */
     public function testIndex()
     {
         $this->markTestIncomplete('Not implemented yet.');
