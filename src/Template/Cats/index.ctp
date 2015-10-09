@@ -2,7 +2,7 @@
     <h3><?= __('Actions') ?></h3>
     <ul class="side-nav">
         <li><?= $this->Html->link(__('New Cat'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('Lost Cats'), ['controller' => 'Cats', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Lost Cats'), ['controller' => 'Cats', 'action' => 'index', 'lost']) ?></li>
         <li><?= $this->Html->link(__('Adoption'), ['controller' => 'Cats', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Breeds'), ['controller' => 'Breeds', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Breed'), ['controller' => 'Breeds', 'action' => 'add']) ?></li>

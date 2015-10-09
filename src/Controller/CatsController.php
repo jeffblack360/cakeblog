@@ -16,7 +16,7 @@ class CatsController extends AppController
      *
      * @return void
      */
-    public function index($status = null)
+    public function index()
     {
         $this->paginate = [
             'contain' => ['Breeds']
