@@ -43,7 +43,12 @@ class CategoriesController extends AppController
         $this->paginate = [
             'contain' => ['ParentCategories']
         ];
-        $this->set('categories', $this->paginate($this->cacheCategories()));
+        
+//        $q = $this->Categories->query();
+//        $this->set('categories', $this->paginate($this->Categories));
+//        $this->set('categories', $this->paginate($this->cacheCategories()));
+//        $this->set('categories', $this->paginate($q->cache('recent-categories')));
+        $this->set('categories', $this->paginate($this->Categories->query()->cache('recent-categories')));
         $this->set('_serialize', ['categories']);
     }
 
