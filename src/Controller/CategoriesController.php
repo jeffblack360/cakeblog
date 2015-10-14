@@ -44,6 +44,9 @@ class CategoriesController extends AppController
             'contain' => ['ParentCategories']
         ];
         
+        $categories = $this->Categories->find()
+                    ->order(['lft' => 'ASC']);
+
 //        $q = $this->Categories->query();
 //        $this->set('categories', $this->paginate($this->Categories));
 //        $this->set('categories', $this->paginate($this->cacheCategories()));

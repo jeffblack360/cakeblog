@@ -58,7 +58,7 @@ Router::scope('/', function ($routes) {
         ['_name' => 'logout']);
 
     $routes->connect('/cats/*',
-        ['controller' => 'Cats', 'action' => 'index', 'index'],
+        ['controller' => 'Cats', 'action' => 'index'],
         ['_name' => 'home']);
 
     $routes->connect('/',
