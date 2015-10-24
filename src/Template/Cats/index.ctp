@@ -4,8 +4,6 @@
         <li><?= $this->Html->link(__('New Cat'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('Lost Cats'), ['lost']) ?></li>
         <li><?= $this->Html->link(__('Adoption'), ['action' => 'index', 'adopt']) ?></li>
-        <li><?= $this->Html->link(__('List Breeds'), ['controller' => 'Breeds', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Breed'), ['controller' => 'Breeds', 'action' => 'add']) ?></li>
     </ul>
 </div>
 <div class="cats index large-10 medium-9 columns">
@@ -14,10 +12,8 @@
         <tr>
             <th><?= $this->Paginator->sort('id') ?></th>
             <th><?= $this->Paginator->sort('name') ?></th>
-            <th><?= $this->Paginator->sort('date_of_birth') ?></th>
             <th><?= $this->Paginator->sort('breed_id') ?></th>
-            <th><?= $this->Paginator->sort('created') ?></th>
-            <th><?= $this->Paginator->sort('modified') ?></th>
+            <th>Status</th>
             <th class="actions"><?= __('Actions') ?></th>
         </tr>
     </thead>
@@ -26,12 +22,10 @@
         <tr>
             <td><?= $this->Number->format($cat->id) ?></td>
             <td><?= h($cat->name) ?></td>
-            <td><?= h($cat->date_of_birth) ?></td>
             <td>
                 <?= $cat->has('breed') ? $this->Html->link($cat->breed->name, ['controller' => 'Breeds', 'action' => 'view', $cat->breed->id]) : '' ?>
             </td>
-            <td><?= h($cat->created) ?></td>
-            <td><?= h($cat->modified) ?></td>
+            <td><?= h($cat->status) ?></td>
             <td class="actions">
                 <?= $this->Html->link(__('View'), ['action' => 'view', $cat->id]) ?>
                 <?= $this->Html->link(__('Edit'), ['action' => 'edit', $cat->id]) ?>
