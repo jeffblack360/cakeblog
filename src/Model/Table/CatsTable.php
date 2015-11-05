@@ -2,6 +2,8 @@
 namespace App\Model\Table;
 
 use App\Model\Entity\Cat;
+use Cake\Log\Log;
+use Cake\Event\Event;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -65,7 +67,24 @@ class CatsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
+        Log::write("debug","buildRules");
         $rules->add($rules->existsIn(['breed_id'], 'Breeds'));
         return $rules;
+    }
+    
+    public function beforeRules(Event $event, Cat $entity, $options, $operation)
+    {
+        Log::write("debug", "beforeRules");
+        Log::write("debug", $options);
+    }
+    
+    public function afterRules(Cake\Event\Event $event, Cat $entity, \ArrayObject $options, $result, $operation)
+    {
+        Log::write("debug", "afterRules");
+        Log::write("debug", $event->name());
+        Log::write("debug", "entity " . $entity);
+        Log::write("debug", $options);
+        Log::write("debug", "result " . $result);
+        Log::write("debug", "operation " . $operation);
     }
 }
