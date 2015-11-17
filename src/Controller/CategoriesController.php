@@ -40,18 +40,58 @@ class CategoriesController extends AppController
      */
     public function index()
     {
+        // Tell the paginate component that we want to return ParentCategories 
+        // associations.
+        $this->paginate = [
+            'contain' => ['ParentCategories']
+        ];
+
+//        $categories = $this->Categories->find()
+//            ->order(['lft' => 'ASC']);
+
+        // Get the sort request -- if there is one.
+        $sortreq = $this->request->query['sort'];
+        
+        // Does the user wish to sort things?
+        if ($sortreq === null) {
+            
+            // Leverage the query cache feature. Return the resultset from
+            // the cache if it's there, otherwise access the database
+            // and cache the result for future requests.
+            $this->set('categories', $this->paginate($this->Categories->query()->cache('recent-categories')));            
+        } else {
+            
+            // User wants to sort the categories. We'll default to lft sort.
+            $sortdir = 'lft-categories';
+            
+            if ($sortreq === 'rght') {
+                $sortdir = 'rght-categories';
+            }
+            
+            $this->set('categories', $this->paginate($this->Categories->query()->cache($sortdir)));                
+            
+        }
+            
+        $this->set('_serialize', ['categories']);
+        
+    }
+    public function index2()
+    {
         $this->paginate = [
             'contain' => ['ParentCategories']
         ];
         
-        $categories = $this->Categories->find()
-                    ->order(['lft' => 'ASC']);
+//        $q = $this->Categories->find()
+//                           ->order(['lft' => 'ASC'])->execute();
 
 //        $q = $this->Categories->query();
 //        $this->set('categories', $this->paginate($this->Categories));
 //        $this->set('categories', $this->paginate($this->cacheCategories()));
 //        $this->set('categories', $this->paginate($q->cache('recent-categories')));
+//        $categories->execute();
+                
         $this->set('categories', $this->paginate($this->Categories->query()->cache('recent-categories')));
+//        $this->set('categories', $this->paginate());
         $this->set('_serialize', ['categories']);
     }
 

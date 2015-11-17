@@ -63,5 +63,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <footer>
         </footer>
     </div>
+    <!-- JavaScript Files Here -->
+    <script type="text/javascript" src="/js/knockout-2.1.0.debug.js"></script>
+    <script type="text/javascript" src="/js/App.js"></script>
 </body>
 </html>

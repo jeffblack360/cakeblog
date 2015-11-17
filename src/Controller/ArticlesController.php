@@ -20,7 +20,6 @@ class ArticlesController extends AppController
     public function index()
     {
         $connection = ConnectionManager::get('default')->config();
-
         $this->set('articles', $this->paginate($this->Articles));
         $this->set('_serialize', ['articles', $connection['database']]);
     }
