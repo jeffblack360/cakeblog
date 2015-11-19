@@ -57,8 +57,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </div>
 
         <div class='liveExample2'>   
-            <h2>Your seat reservations</h2>
-
+            <h2>Your seat reservations (<span data-bind="text: seats().length"></span>)</h2>
 
             <table>
                 <thead><tr>
@@ -66,14 +65,20 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                     </tr></thead>
                 <tbody data-bind="foreach: seats">
                     <tr>
-                        <td data-bind="text: name"></td>
-                        <td data-bind="text: meal().mealName"></td>
-                        <td data-bind="text: meal().price"></td>
+                        <td><input data-bind="value: name" /></td>
+                        <td><select data-bind="options: $root.availableMeals, value: meal, optionsText: 'mealName'"></select></td>
+                        <td data-bind="text: formattedPrice"></td>
+                        <td><a href="#" data-bind="click: $root.removeSeat">Remove</a></td>
                     </tr>    
                 </tbody>
             </table>
 
-            <button data-bind="click: addSeat">Reserve another seat</button>
+
+            <button data-bind="click: addSeat, enable: seats().length < 5">Reserve another seat</button>
+
+            <h3 data-bind="visible: totalSurcharge() > 0">
+                Total surcharge: $<span data-bind="text: totalSurcharge().toFixed(2)"></span>
+            </h3>
 
         </div>
 
