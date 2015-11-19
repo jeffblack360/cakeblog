@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -18,42 +19,66 @@ use Cake\Datasource\ConnectionManager;
 use Cake\Error\Debugger;
 use Cake\Network\Exception\NotFoundException;
 
+$this->layout = false;
 
 $cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
 <!DOCTYPE html>
 <html>
-<head>
+    <head>
     <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
         <?= $cakeDescription ?>
-    </title>
+        </title>
     <?= $this->Html->meta('icon') ?>
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('cake.css') ?>
-</head>
-<body class="home">
-    <div id="content">
-        <p>Knockout.js</p>
-        
-        <div id="productView">
-            <p>
-                SKU: <span data-bind="text: sku"></span>
-            </p>
-            <p>
-                Description: <span data-bind="text: description"></span>
-            </p>
-            <p>
-                Cost: <span data-bind="text: cost"></span>
-            </p>
-            <p>
-                Price: <span data-bind="text: price"></span>
-            </p>
-            <p>
-                Quantity: <span data-bind="text: quantity"></span>
-            </p>
+    </head>
+    <body class="home">
+
+        <div id="content">
+            <h1>Knockout.js</h1>
         </div>
-    </div>
-</body>
+
+        <div class='liveExample'>   
+            <!-- This is a *view* - HTML markup that defines the appearance of your UI -->
+
+            <p>First name: <strong data-bind="text: firstName"></strong></p>
+            <p>Last name: <strong data-bind="text: lastName"></strong></p>
+
+            <p>First name: <input data-bind="value: firstName" /></p>
+            <p>Last name: <input data-bind="value: lastName" /></p>
+
+            <p>Full name: <strong data-bind="text: fullName"></strong></p>
+
+            <button data-bind="click: capitalizeLastName">Go caps</button>
+
+        </div>
+
+        <div class='liveExample2'>   
+            <h2>Your seat reservations</h2>
+
+
+            <table>
+                <thead><tr>
+                        <th>Passenger name</th><th>Meal</th><th>Surcharge</th><th></th>
+                    </tr></thead>
+                <tbody data-bind="foreach: seats">
+                    <tr>
+                        <td data-bind="text: name"></td>
+                        <td data-bind="text: meal().mealName"></td>
+                        <td data-bind="text: meal().price"></td>
+                    </tr>    
+                </tbody>
+            </table>
+
+            <button data-bind="click: addSeat">Reserve another seat</button>
+
+        </div>
+
+        <!-- JavaScript Files Here -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+        <script type="text/javascript" src="/js/App.js"></script>
+    </body>
 </html>
