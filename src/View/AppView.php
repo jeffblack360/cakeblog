@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -11,6 +12,7 @@
  * @since     3.0.0
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\View;
 
 use Cake\View\View;
@@ -18,8 +20,9 @@ use Cake\View\View;
 /**
  * App View class
  */
-class AppView extends View
-{
+class AppView extends View {
+
+//    public $layout = 'BootstrapUI.default';
 
     /**
      * Initialization hook method.
@@ -29,7 +32,11 @@ class AppView extends View
      *
      * @return void
      */
-    public function initialize()
-    {
+    public function initialize() {
+//        $this->loadHelper('Html', ['className' => 'BootstrapUI.Html']);
+//        $this->loadHelper('Form', ['className' => 'BootstrapUI.Form']);
+//        $this->loadHelper('Flash', ['className' => 'BootstrapUI.Flash']);
+//        $this->loadHelper('Paginator', ['className' => 'BootstrapUI.Paginator']);
     }
+
 }

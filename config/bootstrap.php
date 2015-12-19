@@ -210,3 +210,8 @@ require __DIR__ . '/events.php';
  * Load Users Plugin
  */
 //Plugin::load('Users', ['routes' => true, 'bootstrap' => true]);
+
+/**
+ * Load BootstrapUI Plugin
+ */
+Plugin::load('BootstrapUI');

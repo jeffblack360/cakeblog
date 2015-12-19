@@ -12,7 +12,8 @@
         "cakephp/plugin-installer": "*",
         "twbs/bootstrap": "*",
         "cakedc/users": "~3.0",
-        "opauth/opauth": "1.0.x-dev"
+        "opauth/opauth": "1.0.x-dev",
+        "friendsofcake/bootstrap-ui": "~0.3"
     },
     "require-dev": {
         "psy/psysh": "@stable",
