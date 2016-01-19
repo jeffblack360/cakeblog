@@ -1,12 +1,10 @@
-<div class="actions columns large-2 medium-3">
-    <h3><?= __('Actions') ?></h3>
-    <ul class="side-nav">
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Register'), ['action' => 'add']) ?></li>
-    </ul>
-</div>
+<?php
+
+    $this->layout = 'default2';
+
+?>
 <div class="users form large-10 medium-9 columns">
-    <?= $this->Flash->render('auth') ?>
+    <?= $this->Flash->render() ?>
     <?= $this->Form->create() ?>
     <fieldset>
         <legend><?= __('Please enter your username and password') ?></legend>
