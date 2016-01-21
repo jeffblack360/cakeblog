@@ -41,13 +41,10 @@ use Cake\Routing\Router;
  */
 Router::defaultRouteClass('Route');
 
-Router::scope('/', function ($routes) {
-    /**
-     * Here, we are connecting '/' (base path) to a controller called 'Pages',
-     * its action called 'display', and we pass a param to select the view file
-     * to use (in this case, src/Template/Pages/home.ctp)...
-     */
-//    $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
+Router::scope('/users', function ($routes) {
+    $routes->connect('/add',
+        ['controller' => 'Users', 'action' => 'add'],
+        ['_name' => 'register']);
     
     $routes->connect('/login',
         ['controller' => 'Users', 'action' => 'login'],
@@ -56,6 +53,15 @@ Router::scope('/', function ($routes) {
     $routes->connect('/logout',
         ['controller' => 'Users', 'action' => 'logout'],
         ['_name' => 'logout']);
+});
+
+Router::scope('/', function ($routes) {
+    /**
+     * Here, we are connecting '/' (base path) to a controller called 'Pages',
+     * its action called 'display', and we pass a param to select the view file
+     * to use (in this case, src/Template/Pages/home.ctp)...
+     */
+//    $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
     $routes->connect('/',
         ['controller' => 'Pages', 'action' => 'display', 'home'],
