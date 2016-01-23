@@ -1,21 +1,29 @@
-<div class="actions columns large-2 medium-3">
-    <h3><?= __('Actions') ?></h3>
-    <ul class="side-nav">
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
-    </ul>
-</div>
+<?php
+
+    $this->layout = 'default2';
+
+?>
 <div class="users form large-10 medium-9 columns">
     <?= $this->Form->create($user) ?>
     <fieldset>
-        <legend><?= __('Add User') ?></legend>
+        <legend><?= __('Please enter your username and password to register') ?></legend>
         <?php
             echo $this->Form->input('username');
+            echo $this->Form->input('email');
+            echo $this->Form->input('emailconfirm', [
+                'label' => 'Email (confirm)',
+                'type' => 'email'
+            ]);
             echo $this->Form->input('password');
+            echo $this->Form->input('pwdconfirm', [
+                'label' => 'Password (confirm)',
+                'type' => 'password'
+            ]);
             echo $this->Form->input('role', [
                  'options' => ['admin' => 'Admin', 'author' => 'Author']
             ]);
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->submit(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>
