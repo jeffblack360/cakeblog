@@ -39,13 +39,12 @@ class AppController extends Controller
         parent::initialize();
         $this->loadComponent('Flash');
 
-//        $this->loadComponent('Users.UsersAuth');
-        
         // Load Authorization and Authentication
         $this->loadComponent('Auth', [
             'loginRedirect' => [
-                'controller' => 'Articles',
-                'action' => 'index'
+                'controller' => 'Pages',
+                'action' => 'display',
+                'home'
             ],
             'logoutRedirect' => [
                 'controller' => 'Pages',
@@ -55,6 +54,13 @@ class AppController extends Controller
         ]);
     }
     
+    /**
+    * isAuthorized hook method
+    * 
+    * Returns true when user is admin
+    *
+    * @return boolean
+    */
     public function beforeFilter(Event $event)
     {
         $this->Auth->allow(['index','view','display']);
