@@ -25,9 +25,9 @@ class UsersController extends AppController
             
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
-                return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+                return $this->redirect(['action' => 'login']);
             } else {
-                $this->Flash->error_1(__('The user could not be saved. Please, try again.'));
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
         }
         $this->set(compact('user'));
@@ -112,11 +112,10 @@ class UsersController extends AppController
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
-                $this->Flash->success(__('Login successful'));
-                return $this->redirect($this->Auth->redirectUrl());
+                return $this->redirect('/');
             }
             $this->Flash->set(__('Invalid username or password, try again'),[
-                'element' => 'error_1'
+                'element' => 'error'
             ]);
         }
     }
