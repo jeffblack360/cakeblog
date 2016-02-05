@@ -40,6 +40,7 @@ use Cake\Routing\Router;
  *
  */
 Router::defaultRouteClass('Route');
+Router::extensions(['json','xml']);
 
 Router::scope('/users', function ($routes) {
     $routes->connect('/add',
