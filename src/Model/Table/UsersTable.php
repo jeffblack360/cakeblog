@@ -47,23 +47,65 @@ class UsersTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->notEmpty('username', 'A username is required.');
+            ->notEmpty('username', 'A username is required.')
+            ->add('username',[
+                'unique' => [
+                    'rule' => 'validateUnique',
+                    'provider' => 'table',
+                    'message' => 'The username is already taken.'
+                ]
+            ]);
 
         $validator
             ->notEmpty('password', 'A password is required.');
 
         $validator
-            ->notEmpty('role', 'A role is required.');
+            ->requirePresence('role', false)
+            ->allowEmpty('role');
 
         $validator
-            ->add('role', 'inList', [
-                'rule' => ['inList', ['admin', 'author']],
-                'message' => 'Please enter a valid role.'
+            ->requirePresence('email', 'create', 'An email is required.')
+            ->notEmpty('email', 'An email is required.')
+            ->add('email', [
+                'validEmail' => [
+                    'rule' => ['email'],
+                    'message' => 'Please provide a valid email.'
+                ],
+                'unique' => [
+                    'rule' => 'validateUnique',
+                    'provider' => 'table',
+                    'message' => 'The email is already taken.'
+                ]
             ]);
+        
+        $validator
+                ->requirePresence('cemail', 'create', 'An email is required.')
+                ->notEmpty('cemail', 'Confirm email is required.')
+                ->add('cemail', 'custom', [
+                    'rule' => function($value, $context) {
+                        if (isset($context['data']['email']) &&
+                                $value == $context['data']['email']) {
+                            return true;
+                        }
+                        return false;
+                    },
+                    'message' => 'email and confirm email do not match.'
+        ]);
 
         $validator
-            ->notEmpty('email', 'An email is required.');
-        
+                ->requirePresence('cpassword', 'create', 'A password is required.')
+                ->notEmpty('cpassword', 'Confirm password is required.')
+                ->add('cpassword', 'custom', [
+                    'rule' => function($value, $context) {
+                        if (isset($context['data']['password']) &&
+                                $value == $context['data']['password']) {
+                            return true;
+                        }
+                        return false;
+                    },
+                    'message' => 'password and confirm password do not match.'
+        ]);
+
         return $validator;
     }
 
