@@ -10,17 +10,14 @@
         <?php
             echo $this->Form->input('username');
             echo $this->Form->input('email');
-            echo $this->Form->input('emailconfirm', [
+            echo $this->Form->input('cemail', [
                 'label' => 'Email (confirm)',
                 'type' => 'email'
             ]);
             echo $this->Form->input('password');
-            echo $this->Form->input('pwdconfirm', [
+            echo $this->Form->input('cpassword', [
                 'label' => 'Password (confirm)',
                 'type' => 'password'
-            ]);
-            echo $this->Form->input('role', [
-                 'options' => ['admin' => 'Admin', 'author' => 'Author']
             ]);
         ?>
     </fieldset>
