@@ -10,7 +10,9 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-
+use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
+        
 /**
  * Users Model
  *
@@ -124,7 +126,27 @@ class UsersTable extends Table
 
     public function afterSave(Event $event, User $entity, ArrayObject $options)
     {
-        Log::write('info', 'in UsersTable.afterSave '. $entity->username);
-        $this->dispatchEvent('UsersTable.afterSave', compact('entity','options'));
+        if ($entity->isNew()) {
+            Log::write('info', 'User created: '. $entity->id);
+        } else {
+            Log::write('info', 'User saved: '. $entity->id);
+        }
+
+        // Write job_funcs record to verfiy email
+        $jobFuncsTable = TableRegistry::get('JobFuncs');
+        $jobFunc = $jobFuncsTable->newEntity();
+        $jobFunc->process_name = 'email';
+        $jobFunc->process_status = 'new';
+        $jobFunc->func_name = 'verify';
+        $jobFunc->func_status = null;
+        $jobFunc->func_opt = $entity->id;
+        $jobFuncsTable->save($jobFunc); 
+        
+//        $this->dispatchEvent('UsersTable.afterSave', compact('entity','options'));        
     }
+    
+    public function afterSaveCommit(Event $event, User $entity, ArrayObject $options)
+    {
+//        Log::write('info', 'in UsersTable.afterSaveCommit '. $entity->username);        
+    }    
 }
