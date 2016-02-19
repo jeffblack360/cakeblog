@@ -12,7 +12,7 @@ Thank you for creating a FindMyPet Account. Please verify your email address
 </p>
 
 <p>
-Verify now: http
+Verify now: <a href="http://cakeblog.local/users/verify/<?= $verifyHash ?>">http://cakeblog.local/users/verify/<?= $verifyHash ?></a>
 </p>
 
 <p>
