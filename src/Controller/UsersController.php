@@ -24,6 +24,10 @@ class UsersController extends AppController
             $user = $this->Users->patchEntity($user, $this->request->data);
             
             if ($this->Users->save($user)) {
+//                 $event = new Event('Model.Users.afterAdd', $this, [
+//                    'user' => $user
+//                ]);
+//                $this->eventManager()->dispatch($event);
                 $this->Flash->success(__('The user has been saved.'));
                 return $this->redirect(['action' => 'login']);
             } else {
@@ -41,7 +45,7 @@ class UsersController extends AppController
     */
     public function beforeFilter(Event $event)
     {
-        parent::beforeFilter($event);
+        parent::beforeFilter($event);        
         $this->Auth->allow(['add','logout']);
         $this->set('options', ['admin' => 'Admin', 'author' => 'Author']);
     }
