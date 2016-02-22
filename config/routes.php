@@ -47,6 +47,10 @@ Router::scope('/users', function ($routes) {
         ['controller' => 'Users', 'action' => 'add'],
         ['_name' => 'register']);
     
+    $routes->connect('/verify',
+        ['controller' => 'Users', 'action' => 'verify'],
+        ['_name' => 'verify']);
+    
     $routes->connect('/login',
         ['controller' => 'Users', 'action' => 'login'],
         ['_name' => 'login']);
