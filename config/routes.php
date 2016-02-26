@@ -47,7 +47,7 @@ Router::scope('/users', function ($routes) {
         ['controller' => 'Users', 'action' => 'add'],
         ['_name' => 'register']);
     
-    $routes->connect('/verify',
+    $routes->connect('/verify/:hash',
         ['controller' => 'Users', 'action' => 'verify'],
         ['_name' => 'verify']);
     
