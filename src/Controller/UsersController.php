@@ -2,7 +2,9 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Model\Entity\JobFunc;
 use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
 
 /**
  * Users Controller
@@ -46,7 +48,7 @@ class UsersController extends AppController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);        
-        $this->Auth->allow(['add','logout']);
+        $this->Auth->allow(['add','logout','verify']);
         $this->set('options', ['admin' => 'Admin', 'author' => 'Author']);
     }
 
@@ -124,7 +126,7 @@ class UsersController extends AppController
         }
     }
 
-    /**
+   /**
     * Logout method
     *
     * @return void
@@ -149,4 +151,21 @@ class UsersController extends AppController
         $this->set('user', $user);
         $this->set('_serialize', ['user']);
     }
+    
+    /**
+     * Verify method
+     *
+     * Verify a user registration
+     * 
+     * @param string|null $id Verification hash.
+     * @return void
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function verify()
+    {
+        $hash = $this->request->param('hash');
+        $this->Users->verifyUser($hash);
+        
+        // 7. display page showing user is verified
+    }    
 }
