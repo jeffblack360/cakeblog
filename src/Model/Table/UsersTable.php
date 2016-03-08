@@ -124,29 +124,86 @@ class UsersTable extends Table
         return $rules;
     }
 
+    /**
+     * Perform activity after a User has been saved
+     *
+     * @param \Cake\Event\Event $event The event instance
+     * @param \Cake\ORM\Entity $entity The user entity saved
+     * @param ArrayObject $options Misc options if any
+     * @return void
+     */
     public function afterSave(Event $event, User $entity, ArrayObject $options)
     {
         if ($entity->isNew()) {
             Log::write('info', 'User created: '. $entity->id);
+            // For a new user write registration verification rec to job_funcs
+            $jobFuncsTable = TableRegistry::get('JobFuncs');
+            $jobFuncsTable->createVerifyEmailJob($entity);
         } else {
             Log::write('info', 'User saved: '. $entity->id);
         }
-
-        // Write job_funcs record to verfiy email
-        $jobFuncsTable = TableRegistry::get('JobFuncs');
-        $jobFunc = $jobFuncsTable->newEntity();
-        $jobFunc->process_name = 'email';
-        $jobFunc->process_status = 'new';
-        $jobFunc->func_name = 'verify';
-        $jobFunc->func_status = null;
-        $jobFunc->func_opt = $entity->id;
-        $jobFuncsTable->save($jobFunc); 
         
 //        $this->dispatchEvent('UsersTable.afterSave', compact('entity','options'));        
     }
-    
+
+    /**
+     * Perform activity after a User has been saved and commited
+     *
+     * @param \Cake\Event\Event $event The event instance
+     * @param \Cake\ORM\Entity $entity The user entity saved
+     * @param ArrayObject $options Misc options if any
+     * @return void
+     */
     public function afterSaveCommit(Event $event, User $entity, ArrayObject $options)
     {
 //        Log::write('info', 'in UsersTable.afterSaveCommit '. $entity->username);        
-    }    
+    }
+    
+   /**
+    * verifyUser method
+    * 
+    * Confirm user registration
+    *
+    * @return boolean true/false
+    */
+    public function verifyUser($hash) {
+        Log::write('info', 'Begin verifyUser hash = '. $hash);
+        
+        $jobFuncsTable = TableRegistry::get('JobFuncs');
+        
+        $jobfuncs = $jobFuncsTable->find()
+                ->where([
+                    'process_name' => 'email',
+                    'process_status' => 'cmpl',
+                    'func_name' => 'verify',
+                    'func_status' => 'sent',
+                    'func_data' => $hash,
+                ]);
+        
+        $jobfunc = $jobfuncs->first();
+        if (empty($jobfunc)) {
+            return false;
+        }
+        
+        $user = $this->find()
+                    ->where([
+                        'id' => $jobfunc->func_opt,
+                    ])->first();
+        if (empty($user)) {
+            return false;
+        }
+
+        if (md5($user->username) != $hash) {
+            return false;
+        }
+        
+        $jobfunc->func_status = 'cmpl';
+        $jobFuncsTable->save($jobfunc);
+
+        $user->status = 'enabled';
+        $this->save($user);
+        
+        Log::write('info', 'End verifyUser hash = '. $hash);
+        return true;
+    }            
 }
