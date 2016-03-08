@@ -51,6 +51,11 @@ class AppController extends Controller
                 'controller' => 'Pages',
                 'action' => 'display',
                 'home'
+            ],
+            'authenticate' => [
+                'Form' => [
+                    'scope' => ['Users.status' => 'enabled']
+                ]
             ]
         ]);
     }
