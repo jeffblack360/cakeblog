@@ -4,7 +4,7 @@ namespace App\Shell;
 use Cake\Core\Configure;
 use Cake\Console\Shell;
 use Cake\Network\Email\Email;
-use Cake\Utility\Security;
+//use Cake\Utility\Security;
 use App\Model\Entity\JobFunc;
 use App\Model\Entity\User;
 
@@ -35,7 +35,7 @@ class UserShell extends Shell
         $this->out('UserShell running');
 //        $this->JobFuncs->expireVerifyEmail();
         $this->_sendVerifyEmail();
-//        $this->_sendResetEmail();
+        $this->_sendResetEmail();
         $this->out('UserShell complete');
     }
     
@@ -51,7 +51,6 @@ class UserShell extends Shell
         }
         $user = $this->Users->findByUsername($this->args[0])->first();
         $this->out(print_r($user, true));
-        
     }
     
     /**
@@ -70,44 +69,59 @@ class UserShell extends Shell
                 'email: ' . $user->email, 'info'
             );
         }
-        return;
     }
     
     /**
     * _sendVerifyEmail() method
     *
-    * Process job_funcs records that are new email verifications
+    * Process job_funcs records classified as new registration verifications
     *
     * @return void
     */
     private function _sendVerifyEmail()
     {
-        $this->log('Start _verifyEmail', 'info');
-
-        $jobfuncs = $this->JobFuncs->verifyEmailJobs();
+        $jobfuncs = $this->JobFuncs->getVerifyEmailJobs();
         
         // Send verify registration email for each record
         foreach ($jobfuncs as $jobfunc) {
             $query = $this->Users->find()
                     ->where(['id' => $jobfunc->func_opt]);
             $user = $query->first();
-            $jobfunc->func_data = md5($user->username);
             $this->_sendEmail($jobfunc, $user);
             $this->JobFuncs->updateVerifyJobSent($jobfunc);
         }
         
         $this->log('End _sendVerifyEmail', 'info');
+    }
+
+    /**
+    * _sendResetEmail() method
+    *
+    * Process job_funcs records classified as reset email requests
+    *
+    * @return void
+    */
+    private function _sendResetEmail()
+    {
+        $jobfuncs = $this->JobFuncs->getVerifyEmailJobs();
         
-        return;
+        // Send verify registration email for each record
+        foreach ($jobfuncs as $jobfunc) {
+            $query = $this->Users->find()
+                    ->where(['id' => $jobfunc->func_opt]);
+            $user = $query->first();
+            $this->_sendEmail($jobfunc, $user);
+            $this->JobFuncs->updateVerifyJobSent($jobfunc);
+        }
+        
+        $this->log('End _sendVerifyEmail', 'info');
     }
     
    /**
     * _sendEmail() method
     * 
-    * Reusable function to send emails to a user.
+    * Reusable function for sending user emails
     * 
-    * Example: https://cakeblog.local/verify/pfOvslMj2LK3vvPi8ONLMA99sYRMynyr
-    *
     * @return void
     */
     private function _sendEmail(JobFunc $jobfunc, User $user) {
@@ -116,23 +130,22 @@ class UserShell extends Shell
                 'id: ' . $user->id . ' ' .
                 'username: ' . $user->username . ' ' .
                 'email: ' . $user->email . ' ' .
-                'func_data: ' . $jobfunc->func_data
-                , 'info'
+                'func_data: ' . $jobfunc->func_data, 'info'
         );
-        
-        // Wrap sending email in try/catch
-        // if success sending email then update job_funcs record
-        
-//        $email = new Email('default');
-//        $email->template('verify')
-//                ->emailFormat('html')
-//                ->viewVars([
-//                    'emailAddr' => $user->email,
-//                    'verifyHash' => $jobfunc->func_data,
-//                ]);
-//        $email->from(['jblackx-findmypet@yahoo.com' => 'FindMyPet.com'])
-//                ->to('jeff.black@outlook.com')
-//                ->subject('About')
-//                ->send('Confirm Registration');
+
+        if (Configure::read('debug') && Configure::read('sendEmail')) {
+            // Wrap sending email in try/catch
+            $email = new Email('default');
+            $email->template('verify')
+                    ->emailFormat('html')
+                    ->viewVars([
+                        'emailAddr' => $user->email,
+                        'verifyHash' => $jobfunc->func_data,
+                    ]);
+            $email->from(['jblackx-findmypet@yahoo.com' => 'FindMyPet.com'])
+                    ->to('jeff.black@outlook.com')
+                    ->subject('About')
+                    ->send('Confirm Registration');
+        }
     }
 }
