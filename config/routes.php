@@ -58,6 +58,14 @@ Router::scope('/users', function ($routes) {
     $routes->connect('/logout',
         ['controller' => 'Users', 'action' => 'logout'],
         ['_name' => 'logout']);
+    
+    $routes->connect('/reset/username',
+        ['controller' => 'Users', 'action' => 'resetuname'],
+        ['_name' => 'resetuname']);
+    
+    $routes->connect('/reset/password',
+        ['controller' => 'Users', 'action' => 'resetpwd'],
+        ['_name' => 'resetpwd']);
 });
 
 Router::scope('/', function ($routes) {
