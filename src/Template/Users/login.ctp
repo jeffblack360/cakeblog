@@ -10,7 +10,6 @@
         <legend><?= __('Please enter your Username and Password') ?></legend>
         <?php
             echo $this->Form->input('username', [
-                'label' => '',
                 'placeholder' => "Username",
                 'data-bind' => "value: userName"
             ]);
@@ -24,7 +23,6 @@
     <div class="form-group">
         <?php
             echo $this->Form->input('password', [
-                'label' => '',
                 'placeholder' => "Password"
             ]);
             echo $this->Html->link(
