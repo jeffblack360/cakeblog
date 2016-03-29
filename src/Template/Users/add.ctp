@@ -9,22 +9,22 @@
         <legend><?= __('Please enter a Username, Email, and Password to register') ?></legend>
         <?php
             echo $this->Form->input('username', [
-                'placeholder' => 'Username',
+                'placeholder' => '',
             ]);
             echo $this->Form->input('email', [
-                'placeholder' => 'Email',
+                'placeholder' => '',
             ]);
             echo $this->Form->input('cemail', [
                 'label' => 'Email (confirm)',
-                'placeholder' => 'Email (confirm)',
+                'placeholder' => '',
                 'type' => 'email'
             ]);
             echo $this->Form->input('password', [
-                'placeholder' => 'Password',
+                'placeholder' => '',
             ]);
             echo $this->Form->input('cpassword', [
                 'label' => 'Password (confirm)',
-                'placeholder' => 'Password (confirm)',
+                'placeholder' => '',
                 'type' => 'password'
             ]);
         ?>
