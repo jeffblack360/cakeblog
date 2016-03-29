@@ -1,37 +1,34 @@
 <?php
 
     $this->layout = 'default2';
-
 ?>
 <div class="users form large-10 medium-9 columns">
     <?= $this->Flash->render() ?>
-    <?= $this->Form->create() ?>
     <div class="form-group">
+    <?= $this->Form->create() ?>
         <legend><?= __('Please enter your Username and Password') ?></legend>
         <?php
             echo $this->Form->input('username', [
-                'placeholder' => "Username",
+                'placeholder' => '',
                 'data-bind' => "value: userName"
             ]);
             echo $this->Html->link(
                 'Forgot Username?',
-                $this->Url->build(['_name' => 'resetuname'])
+                $this->Url->build(['_name' => 'reset', 'do' => 'user'])
             );
         ?>
-    </div>
-    <br>
-    <div class="form-group">
+        <br><br>
         <?php
             echo $this->Form->input('password', [
-                'placeholder' => "Password"
+                'placeholder' => ''
             ]);
             echo $this->Html->link(
                 'Forgot Password?',
-                $this->Url->build(['_name' => 'resetpwd'])
+                $this->Url->build(['_name' => 'reset', 'do' => 'password'])
             );
         ?>
-    </div>        
-    <br>
-    <?= $this->Form->button(__('Login')) ?>
+        <br><br>
+    <?= $this->Form->button(__('Log In')) ?>
     <?= $this->Form->end() ?>
+    </div>
 </div>
