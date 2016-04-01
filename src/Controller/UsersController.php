@@ -48,7 +48,7 @@ class UsersController extends AppController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);        
-        $this->Auth->allow(['add','logout','verify']);
+        $this->Auth->allow(['add','logout','verify','reset']);
         $this->set('options', ['admin' => 'Admin', 'author' => 'Author']);
     }
 
@@ -168,4 +168,19 @@ class UsersController extends AppController
         
         // 7. display page showing user is verified
     }    
+    
+    /**
+     * reset
+     *
+     * Reset UserName or Password
+     * 
+     * @param string|null $id 
+     * @return void
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function reset()
+    {
+        $do = $this->request->query('do');
+        $this->set('reset', $do);
+    }
 }
