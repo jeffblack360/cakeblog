@@ -59,13 +59,9 @@ Router::scope('/users', function ($routes) {
         ['controller' => 'Users', 'action' => 'logout'],
         ['_name' => 'logout']);
     
-    $routes->connect('/reset/username',
-        ['controller' => 'Users', 'action' => 'resetuname'],
-        ['_name' => 'resetuname']);
-    
-    $routes->connect('/reset/password',
-        ['controller' => 'Users', 'action' => 'resetpwd'],
-        ['_name' => 'resetpwd']);
+    $routes->connect('/reset',
+        ['controller' => 'Users', 'action' => 'reset'],
+        ['_name' => 'reset']);
 });
 
 Router::scope('/', function ($routes) {
